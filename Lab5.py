@@ -20,8 +20,8 @@ def deikstra(v: nmp.ndarray, e: nmp.ndarray, start: int):
                     paths[current_map[j]] = paths[current_map[current]] + [current_map[current]]
         weights[not_visited] = not_visited_weights
         not_visited[current_map[current]] = False
+        print(f"Iteration {i + 1}({current_map[current] + 1}):\tweights={weights}\tnot_visited:{not_visited}")
         current_map = nmp.delete(current_map, current)
-
     return weights, paths
 
 
@@ -35,7 +35,10 @@ def main():
         [None, None, None, 6, None, 9],
         [14, None, 2, None, 9, None],
     ])
-    print(deikstra(v, e, 0))
+    weights, paths = deikstra(v, e, 0)
+    print('Result:')
+    for i, (w, p) in enumerate(zip(weights, paths)):
+        print(f"1->{i + 1}: {w},\t{nmp.array(p + [i]) + 1}")
 
 
 if __name__ == '__main__':
